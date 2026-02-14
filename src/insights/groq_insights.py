@@ -66,15 +66,21 @@ class GroqInsightsEngine:
             try:
                 self.client = Groq(api_key=self.api_key)
             except TypeError as e:
-                if 'proxies' in str(e):
+                # groq SDK version incompatibility with httpx
+                logger.warning(f"Groq init with default client failed: {e}")
+                try:
                     import httpx
-                    http_client = httpx.Client()
+                    http_client = httpx.Client(
+                        base_url="https://api.groq.com",
+                        follow_redirects=True,
+                    )
                     self.client = Groq(
                         api_key=self.api_key,
-                        http_client=http_client
+                        http_client=http_client,
                     )
-                else:
-                    raise
+                except Exception as e2:
+                    logger.warning(f"Groq init with httpx fallback failed: {e2}")
+                    self.client = None
             logger.info(f"✅ Groq client ready | Model: {model}")
         else:
             self.client = None
