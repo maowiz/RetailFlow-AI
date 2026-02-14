@@ -1,0 +1,410 @@
+/* ============================================================
+   AI SALES FORECAST DASHBOARD — PREMIUM DARK THEME
+   A truly modern, glassmorphism + neon-accent design system.
+   ============================================================ */
+
+/* ── Google Font ────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ── Design Tokens ──────────────────────────────────────────── */
+:root {
+    --c-bg: #06080d;
+    --c-surface: #0d1117;
+    --c-card: rgba(22, 27, 38, 0.72);
+    --c-card-border: rgba(0, 212, 255, 0.12);
+    --c-primary: #00d4ff;
+    --c-primary-glow: rgba(0, 212, 255, 0.35);
+    --c-secondary: #a855f7;
+    --c-sec-glow: rgba(168, 85, 247, 0.30);
+    --c-success: #34d399;
+    --c-warning: #fbbf24;
+    --c-danger: #f87171;
+    --c-text: #e6edf3;
+    --c-text-muted: #8b949e;
+    --c-divider: rgba(0, 212, 255, 0.10);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --glass-blur: 20px;
+    --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Global ─────────────────────────────────────────────────── */
+html,
+body,
+[data-testid="stAppViewContainer"],
+[data-testid="stApp"] {
+    font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif !important;
+    color: var(--c-text) !important;
+}
+
+[data-testid="stAppViewContainer"] {
+    background:
+        radial-gradient(ellipse 80% 70% at 50% -20%, rgba(0, 212, 255, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 100%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+        var(--c-bg) !important;
+}
+
+.main .block-container {
+    padding: 2.5rem 2rem 3rem !important;
+    max-width: 1500px !important;
+    animation: pageFadeIn 0.55s ease-out;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Hide Chrome ────────────────────────────────────────────── */
+#MainMenu,
+footer,
+header,
+[data-testid="stToolbar"],
+[data-testid="stDecoration"] {
+    display: none !important;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, #080c14 0%, #0d1117 40%, #101820 100%) !important;
+    border-right: 1px solid var(--c-card-border) !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdown"] h1,
+[data-testid="stSidebar"] .stRadio label {
+    font-family: 'Inter', sans-serif !important;
+}
+
+[data-testid="stSidebar"] .stRadio>div {
+    gap: 4px !important;
+}
+
+[data-testid="stSidebar"] .stRadio>div>label {
+    background: rgba(22, 27, 38, 0.55) !important;
+    border: 1px solid transparent !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 0.65rem 1rem !important;
+    transition: var(--transition) !important;
+    font-weight: 500 !important;
+}
+
+[data-testid="stSidebar"] .stRadio>div>label:hover {
+    background: rgba(0, 212, 255, 0.08) !important;
+    border-color: var(--c-card-border) !important;
+}
+
+[data-testid="stSidebar"] .stRadio>div>label[data-checked="true"],
+[data-testid="stSidebar"] .stRadio>div>label[aria-checked="true"] {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(168, 85, 247, 0.12)) !important;
+    border-color: var(--c-primary) !important;
+    box-shadow: 0 0 20px var(--c-primary-glow);
+}
+
+/* ── Metric Cards ───────────────────────────────────────────── */
+[data-testid="stMetric"] {
+    background: var(--c-card) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    -webkit-backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--c-card-border) !important;
+    border-radius: var(--radius) !important;
+    padding: 1.4rem 1.3rem !important;
+    transition: var(--transition) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-testid="stMetric"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--c-primary), var(--c-secondary));
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 212, 255, 0.30) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--c-primary-glow);
+}
+
+[data-testid="stMetric"]:hover::before {
+    opacity: 1;
+}
+
+[data-testid="stMetricValue"] {
+    font-size: 1.75rem !important;
+    font-weight: 800 !important;
+    font-family: 'Inter', sans-serif !important;
+    letter-spacing: -0.02em !important;
+    background: linear-gradient(135deg, var(--c-primary) 0%, var(--c-secondary) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+}
+
+[data-testid="stMetricLabel"] {
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    color: var(--c-text-muted) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+}
+
+[data-testid="stMetricDelta"] {
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+}
+
+[data-testid="stMetricDelta"] svg {
+    display: inline !important;
+}
+
+/* ── Headings ───────────────────────────────────────────────── */
+h1 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 2.4rem !important;
+    letter-spacing: -0.03em !important;
+    background: linear-gradient(135deg, #ffffff 15%, var(--c-primary) 50%, var(--c-secondary) 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    padding-bottom: 0.3rem !important;
+}
+
+h2 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    font-size: 1.45rem !important;
+    letter-spacing: -0.01em !important;
+}
+
+h3,
+h4 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    color: var(--c-text) !important;
+}
+
+/* ── Dividers ───────────────────────────────────────────────── */
+hr {
+    border: none !important;
+    height: 1px !important;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            var(--c-primary) 20%,
+            var(--c-secondary) 80%,
+            transparent 100%) !important;
+    margin: 2rem 0 !important;
+    opacity: 0.35;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.stButton>button {
+    background: linear-gradient(135deg, var(--c-primary), var(--c-secondary)) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: var(--radius-sm) !important;
+    padding: 0.7rem 1.8rem !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 0.92rem !important;
+    letter-spacing: 0.02em !important;
+    transition: var(--transition) !important;
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.25) !important;
+}
+
+.stButton>button:hover {
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 32px rgba(0, 212, 255, 0.45) !important;
+}
+
+.stButton>button:active {
+    transform: translateY(0) scale(0.98) !important;
+}
+
+/* ── Tabs ───────────────────────────────────────────────────── */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 6px !important;
+    background: rgba(13, 17, 23, 0.7) !important;
+    padding: 6px !important;
+    border-radius: var(--radius-sm) !important;
+    border: 1px solid var(--c-card-border) !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    border-radius: 8px !important;
+    padding: 10px 22px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.88rem !important;
+    transition: var(--transition) !important;
+    color: var(--c-text-muted) !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+    color: white !important;
+    background: rgba(0, 212, 255, 0.06) !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(168, 85, 247, 0.15)) !important;
+    color: white !important;
+    box-shadow: 0 0 16px var(--c-primary-glow) !important;
+    border: 1px solid rgba(0, 212, 255, 0.25) !important;
+}
+
+/* ── Charts ─────────────────────────────────────────────────── */
+.js-plotly-plot {
+    border-radius: var(--radius) !important;
+    overflow: hidden !important;
+    border: 1px solid var(--c-card-border) !important;
+    background: var(--c-card) !important;
+    backdrop-filter: blur(12px) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ── DataFrames ─────────────────────────────────────────────── */
+[data-testid="stDataFrame"] {
+    border-radius: var(--radius) !important;
+    overflow: hidden !important;
+    border: 1px solid var(--c-card-border) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* ── Expanders ──────────────────────────────────────────────── */
+[data-testid="stExpander"] {
+    background: var(--c-card) !important;
+    backdrop-filter: blur(var(--glass-blur)) !important;
+    border: 1px solid var(--c-card-border) !important;
+    border-radius: var(--radius) !important;
+    overflow: hidden !important;
+    transition: var(--transition) !important;
+}
+
+[data-testid="stExpander"]:hover {
+    border-color: rgba(0, 212, 255, 0.22) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-testid="stExpander"] summary {
+    font-weight: 600 !important;
+    font-family: 'Inter', sans-serif !important;
+    padding: 1rem 1.2rem !important;
+}
+
+/* ── Inputs ─────────────────────────────────────────────────── */
+.stTextInput>div>div>input,
+.stSelectbox>div>div,
+.stMultiSelect>div>div,
+.stDateInput>div>div>input {
+    background: rgba(13, 17, 23, 0.8) !important;
+    border: 1px solid var(--c-card-border) !important;
+    border-radius: 8px !important;
+    color: var(--c-text) !important;
+    font-family: 'Inter', sans-serif !important;
+    transition: var(--transition) !important;
+}
+
+.stTextInput>div>div>input:focus {
+    border-color: var(--c-primary) !important;
+    box-shadow: 0 0 0 3px var(--c-primary-glow) !important;
+}
+
+/* ── Alert Boxes ────────────────────────────────────────────── */
+[data-testid="stAlert"] {
+    border-radius: var(--radius-sm) !important;
+    border-left-width: 4px !important;
+    background: var(--c-card) !important;
+    backdrop-filter: blur(12px) !important;
+}
+
+/* ── Markdown Body ──────────────────────────────────────────── */
+[data-testid="stMarkdown"] {
+    line-height: 1.7 !important;
+}
+
+[data-testid="stMarkdown"] p {
+    color: var(--c-text-muted) !important;
+}
+
+[data-testid="stMarkdown"] strong {
+    color: var(--c-text) !important;
+}
+
+/* ── Spinner ────────────────────────────────────────────────── */
+.stSpinner>div {
+    border-top-color: var(--c-primary) !important;
+}
+
+/* ── Progress Bar ───────────────────────────────────────────── */
+.stProgress>div>div>div {
+    background: linear-gradient(90deg, var(--c-primary), var(--c-secondary)) !important;
+    border-radius: 8px !important;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--c-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--c-primary), var(--c-secondary));
+    border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--c-primary);
+}
+
+/* ── Column layout override to prevent truncation ───────────── */
+[data-testid="stHorizontalBlock"] {
+    flex-wrap: nowrap !important;
+    gap: 1rem !important;
+}
+
+[data-testid="stHorizontalBlock"]>[data-testid="stColumn"] {
+    min-width: 0 !important;
+    overflow: visible !important;
+}
+
+/* ── Custom glow animation for key elements ─────────────────── */
+@keyframes subtleGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px var(--c-primary-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 30px var(--c-primary-glow);
+    }
+}
+
+/* ── Selection Color ────────────────────────────────────────── */
+::selection {
+    background: rgba(0, 212, 255, 0.3);
+    color: white;
+}

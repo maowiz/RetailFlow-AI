@@ -1,0 +1,113 @@
+{
+  "comparison": {
+    "AI Ensemble": {
+      "mape": 1.2209247364101985,
+      "forecast_accuracy": -0.2209247364101985,
+      "total_over_forecast_units": 329071.79690946237,
+      "total_under_forecast_units": 245217.5052150295,
+      "excess_inventory_cost": 60247185.83143787,
+      "stockout_cost": 1839131.2891127213,
+      "total_cost_of_errors": 62086317.120550595,
+      "rmse": 56.56677247766184
+    },
+    "Naive (Last Period)": {
+      "mape": 51.64497756958008,
+      "forecast_accuracy": -50.64497756958008,
+      "total_over_forecast_units": 8590456.0,
+      "total_under_forecast_units": 8590454.0,
+      "excess_inventory_cost": 1572759424.0,
+      "stockout_cost": 64428408.0,
+      "total_cost_of_errors": 1637187840.0,
+      "rmse": 1244.2838134765625
+    },
+    "Seasonal Naive": {
+      "mape": 16.603694915771484,
+      "forecast_accuracy": -15.603694915771484,
+      "total_over_forecast_units": 5922201.0,
+      "total_under_forecast_units": 5753435.0,
+      "excess_inventory_cost": 1084249472.0,
+      "stockout_cost": 43150764.0,
+      "total_cost_of_errors": 1127400192.0,
+      "rmse": 1286.6304931640625
+    }
+  },
+  "savings": {
+    "holding_cost_savings": 1512512238.1685622,
+    "stockout_cost_savings": 62589276.710887276,
+    "total_direct_savings": 1575101522.8794494,
+    "accuracy_improvement_pct": 5042.405283316988,
+    "excess_inventory_reduction_units": 8261384.203090537,
+    "working_capital_freed": 82613842.03090537,
+    "working_capital_cost_saved": 6609107.36247243,
+    "annualized_savings_estimate": 35932003490.68744,
+    "annualized_capital_freed": 1884628271.3300288,
+    "savings_pct": 96.20774625833096
+  },
+  "executive_summary": {
+    "headline_metrics": {
+      "annual_savings_estimate": 35932003490.68744,
+      "forecast_accuracy_improvement": 5042.405283316988,
+      "working_capital_freed": 1884628271.3300288,
+      "cost_reduction_pct": 96.20774625833096
+    },
+    "inventory_health": {
+      "avg_inventory_turnover": 107.67008818112765,
+      "avg_days_of_supply": 3.617306735565621,
+      "total_safety_stock_cost": 29235.0
+    },
+    "risk_summary": {
+      "high_risk_segments": 0,
+      "total_segments": 54,
+      "total_weekly_exposure": 879123.8439178467,
+      "top_risk_segments": [
+        {
+          "segment": 28,
+          "composite_risk_score": 22.418394693971727,
+          "risk_category": "LOW",
+          "weekly_revenue_at_risk": 17329.63348388672
+        },
+        {
+          "segment": 40,
+          "composite_risk_score": 22.045241170245554,
+          "risk_category": "LOW",
+          "weekly_revenue_at_risk": 19126.98516845703
+        },
+        {
+          "segment": 30,
+          "composite_risk_score": 21.087196253806304,
+          "risk_category": "LOW",
+          "weekly_revenue_at_risk": 7027.241744995117
+        },
+        {
+          "segment": 39,
+          "composite_risk_score": 19.664710040074574,
+          "risk_category": "LOW",
+          "weekly_revenue_at_risk": 17016.91390991211
+        },
+        {
+          "segment": 11,
+          "composite_risk_score": 19.49325537594879,
+          "risk_category": "LOW",
+          "weekly_revenue_at_risk": 22650.96221923828
+        }
+      ]
+    },
+    "recommendations": [
+      {
+        "priority": "HIGH",
+        "action": "Implement AI-driven reorder system across all stores",
+        "impact": "$35,932,003,491 annual savings"
+      },
+      {
+        "priority": "MEDIUM",
+        "action": "Transition from manual to AI-based demand planning",
+        "impact": "5042.4% accuracy improvement"
+      },
+      {
+        "priority": "MEDIUM",
+        "action": "Set up automated weekly model retraining pipeline",
+        "impact": "Maintain forecast accuracy as patterns evolve"
+      }
+    ]
+  }
+}

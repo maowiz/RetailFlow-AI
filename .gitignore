@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+env/
+
+# IDEs
+.vscode/
+.idea/
+.gemini/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# ── Large data files (exceed GitHub 100MB limit) ──
+data/processed/
+data/raw/
+*.db
+*.h5
+*.pkl
+*.pickle
+
+# Keep data/output/ (small, needed for dashboard)
+# But exclude any file over 50MB 
+data/output/features_engineered.parquet
+
+# Models (exclude large model files)
+models/*.pkl
+models/*.h5
+models/*.joblib
+
+# Deployment folder (separate repo)
+hf-deploy/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Documentation builds
+docs/_build/
+site/

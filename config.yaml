@@ -1,0 +1,4 @@
+data:
+  database_path: data/processed/store_sales.db
+  processed_path: data/processed
+  raw_path: /kaggle/input/competitions/store-sales-time-series-forecasting

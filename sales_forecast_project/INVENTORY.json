@@ -1,0 +1,125 @@
+{
+  "created_at": "2026-02-13T19:58:01.865655",
+  "total_files": 28,
+  "total_size_mb": 0.16,
+  "files": {
+    "config.yaml": {
+      "size_bytes": 161,
+      "size_mb": 0.0
+    },
+    "src/__init__.py": {
+      "size_bytes": 0,
+      "size_mb": 0.0
+    },
+    "src/optimization/inventory_optimizer.py": {
+      "size_bytes": 8861,
+      "size_mb": 0.01
+    },
+    "src/optimization/financial_impact.py": {
+      "size_bytes": 15820,
+      "size_mb": 0.02
+    },
+    "src/optimization/reorder_point.py": {
+      "size_bytes": 11495,
+      "size_mb": 0.01
+    },
+    "src/optimization/safety_stock.py": {
+      "size_bytes": 11355,
+      "size_mb": 0.01
+    },
+    "src/optimization/__init__.py": {
+      "size_bytes": 0,
+      "size_mb": 0.0
+    },
+    "src/models/base_model.py": {
+      "size_bytes": 6097,
+      "size_mb": 0.01
+    },
+    "src/models/model_registry.py": {
+      "size_bytes": 11403,
+      "size_mb": 0.01
+    },
+    "src/models/ensemble_model.py": {
+      "size_bytes": 44302,
+      "size_mb": 0.04
+    },
+    "src/models/model_evaluator.py": {
+      "size_bytes": 18907,
+      "size_mb": 0.02
+    },
+    "src/models/__init__.py": {
+      "size_bytes": 0,
+      "size_mb": 0.0
+    },
+    "src/models/xgboost_model.py": {
+      "size_bytes": 7521,
+      "size_mb": 0.01
+    },
+    "src/models/prophet_model.py": {
+      "size_bytes": 9781,
+      "size_mb": 0.01
+    },
+    "src/models/random_forest_model.py": {
+      "size_bytes": 5555,
+      "size_mb": 0.01
+    },
+    "src/data/etl_pipeline.py": {
+      "size_bytes": 871,
+      "size_mb": 0.0
+    },
+    "src/data/extract.py": {
+      "size_bytes": 1310,
+      "size_mb": 0.0
+    },
+    "src/data/transform.py": {
+      "size_bytes": 1483,
+      "size_mb": 0.0
+    },
+    "src/data/load.py": {
+      "size_bytes": 715,
+      "size_mb": 0.0
+    },
+    "src/data/__init__.py": {
+      "size_bytes": 0,
+      "size_mb": 0.0
+    },
+    "src/data/validators.py": {
+      "size_bytes": 149,
+      "size_mb": 0.0
+    },
+    "src/features/external_features.py": {
+      "size_bytes": 5165,
+      "size_mb": 0.0
+    },
+    "src/features/time_features.py": {
+      "size_bytes": 502,
+      "size_mb": 0.0
+    },
+    "src/features/lag_features.py": {
+      "size_bytes": 616,
+      "size_mb": 0.0
+    },
+    "src/features/feature_pipeline.py": {
+      "size_bytes": 1989,
+      "size_mb": 0.0
+    },
+    "src/features/__init__.py": {
+      "size_bytes": 0,
+      "size_mb": 0.0
+    },
+    "src/features/interaction_features.py": {
+      "size_bytes": 96,
+      "size_mb": 0.0
+    },
+    "src/features/store_features.py": {
+      "size_bytes": 334,
+      "size_mb": 0.0
+    }
+  },
+  "summary": {
+    "csv_files": 0,
+    "model_files": 0,
+    "python_files": 27,
+    "config_files": 1
+  }
+}
