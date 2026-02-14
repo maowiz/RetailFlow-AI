@@ -55,7 +55,7 @@ class GroqInsightsEngine:
         self.temperature = temperature
         self.max_tokens = max_tokens
         
-        self.api_key = api_key or os.environ.get('GROQ_API_KEY')
+        self.api_key = (api_key or os.environ.get('GROQ_API_KEY', '')).strip()
         self.client = None  # SDK client (optional)
         self._use_direct_http = False  # fallback flag
         
