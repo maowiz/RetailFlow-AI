@@ -55,36 +55,26 @@ class GroqInsightsEngine:
         self.temperature = temperature
         self.max_tokens = max_tokens
         
-        if not GROQ_AVAILABLE:
-            self.client = None
-            logger.warning("Groq not available.")
+        self.api_key = api_key or os.environ.get('GROQ_API_KEY')
+        self.client = None  # SDK client (optional)
+        self._use_direct_http = False  # fallback flag
+        
+        if not self.api_key:
+            logger.warning("❌ No GROQ_API_KEY found")
             return
         
-        self.api_key = api_key or os.environ.get('GROQ_API_KEY')
-        
-        if self.api_key:
+        if GROQ_AVAILABLE:
             try:
                 self.client = Groq(api_key=self.api_key)
-            except TypeError as e:
-                # groq SDK version incompatibility with httpx
-                logger.warning(f"Groq init with default client failed: {e}")
-                try:
-                    import httpx
-                    http_client = httpx.Client(
-                        base_url="https://api.groq.com",
-                        follow_redirects=True,
-                    )
-                    self.client = Groq(
-                        api_key=self.api_key,
-                        http_client=http_client,
-                    )
-                except Exception as e2:
-                    logger.warning(f"Groq init with httpx fallback failed: {e2}")
-                    self.client = None
-            logger.info(f"✅ Groq client ready | Model: {model}")
+                # Test the client with a minimal call
+                logger.info(f"Groq SDK client created | Model: {model}")
+            except Exception as e:
+                logger.warning(f"Groq SDK init failed: {e}, using direct HTTP")
+                self._use_direct_http = True
         else:
-            self.client = None
-            logger.warning("❌ No GROQ_API_KEY found")
+            self._use_direct_http = True
+        
+        logger.info(f"✅ Groq ready | Model: {model} | Direct HTTP: {self._use_direct_http}")
     
     def _call_groq(
         self,
@@ -95,31 +85,75 @@ class GroqInsightsEngine:
     ) -> str:
         """
         Make a call to Groq API with error handling.
+        Uses direct HTTP requests as fallback if SDK fails.
         """
-        if self.client is None:
+        if not self.api_key:
             return self._fallback_response()
         
-        try:
-            response = self.client.chat.completions.create(
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt}
-                ],
-                model=self.model,
-                temperature=temperature or self.temperature,
-                max_tokens=max_tokens or self.max_tokens,
-                top_p=0.9,
-                stream=False
-            )
-            
-            result = response.choices[0].message.content
-            tokens = response.usage.total_tokens
-            logger.info(f"Groq call successful | Tokens: {tokens}")
-            
-            return result
+        temp = temperature or self.temperature
+        tokens = max_tokens or self.max_tokens
         
+        # Try SDK first if available and not already flagged for HTTP
+        if self.client and not self._use_direct_http:
+            try:
+                response = self.client.chat.completions.create(
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    model=self.model,
+                    temperature=temp,
+                    max_tokens=tokens,
+                    top_p=0.9,
+                    stream=False
+                )
+                result = response.choices[0].message.content
+                logger.info(f"Groq SDK call successful | Tokens: {response.usage.total_tokens}")
+                return result
+            except Exception as e:
+                logger.warning(f"Groq SDK call failed: {e}, switching to direct HTTP")
+                self._use_direct_http = True
+        
+        # Direct HTTP fallback (works everywhere)
+        return self._call_groq_http(system_prompt, user_prompt, temp, tokens)
+    
+    def _call_groq_http(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        temperature: float,
+        max_tokens: int
+    ) -> str:
+        """Direct HTTP call to Groq API — bypasses SDK entirely."""
+        import requests as req
+        
+        try:
+            resp = req.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "model": self.model,
+                    "messages": [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    "temperature": temperature,
+                    "max_tokens": max_tokens,
+                    "top_p": 0.9,
+                },
+                timeout=30,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            result = data["choices"][0]["message"]["content"]
+            tokens_used = data.get("usage", {}).get("total_tokens", "?")
+            logger.info(f"Groq HTTP call successful | Tokens: {tokens_used}")
+            return result
         except Exception as e:
-            logger.error(f"Groq API error: {str(e)}")
+            logger.error(f"Groq HTTP API error: {str(e)}")
             return f"⚠️ AI insight generation failed: {str(e)}"
     
     def _fallback_response(self) -> str:
