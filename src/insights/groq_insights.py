@@ -63,7 +63,18 @@ class GroqInsightsEngine:
         self.api_key = api_key or os.environ.get('GROQ_API_KEY')
         
         if self.api_key:
-            self.client = Groq(api_key=self.api_key)
+            try:
+                self.client = Groq(api_key=self.api_key)
+            except TypeError as e:
+                if 'proxies' in str(e):
+                    import httpx
+                    http_client = httpx.Client()
+                    self.client = Groq(
+                        api_key=self.api_key,
+                        http_client=http_client
+                    )
+                else:
+                    raise
             logger.info(f"✅ Groq client ready | Model: {model}")
         else:
             self.client = None

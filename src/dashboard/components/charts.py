@@ -140,7 +140,7 @@ def create_model_comparison_bar(
     fig = go.Figure(go.Bar(
         y=df['model'], x=df[metric],
         orientation='h',
-        marker=dict(color=colors, cornerradius=6,
+        marker=dict(color=colors,
                     line=dict(color='rgba(255,255,255,0.08)', width=1)),
         text=df[metric].apply(lambda x: f'{x:,.2f}'),
         textposition='outside',
